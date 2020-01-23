@@ -80,3 +80,9 @@ Ans:db.movies.find({$and:[{synopsis:{$regex:"Bilbo"}},{synopsis:{$not:/Gandalf/}
 db.movies.find({$and:[{synopsis:{$regex:"dwarves"}},{synopsis:{$regex:"hobbit"}}]}).pretty()
 (5) find all movies that have a synopsis that contains the word "gold" and "dragon"
 Ans:db.movies.find({$and:[{synopsis:{$regex:"gold"}},{synopsis:{$regex:"dragon"}}]}).pretty()
+
+*DELETE*
+(1) delete the movie "Pee Wee Herman's Big Adventure"
+Ans:db.movies.remove({title:"Pee Wee herman's Big Adventure"})
+(2) delete the movie "Avatar"
+Ans:delete the movie "Avatar"
