@@ -86,3 +86,103 @@ Ans:db.movies.find({$and:[{synopsis:{$regex:"gold"}},{synopsis:{$regex:"dragon"}
 Ans:db.movies.remove({title:"Pee Wee herman's Big Adventure"})
 (2) delete the movie "Avatar"
 Ans:delete the movie "Avatar"
+
+*RELATIONSHIPS*
+(1) Insert into users collection
+Ans:db.users.insert([ {
+  username: "GoodGuyGreg",
+  first_name: "GoodGuy",
+  last_name:"Greg"
+},
+{
+  username:"ScumbagSteve",
+  full_name: {
+    first: "Scumbag",
+    last: "Steve"
+}}])
+
+(2) Insert into post collection
+Ans:db.posts.insert([{
+  username : "GoodGuyGreg",
+  title : "Passes out at party",
+  body : "Wakes up early and cleans house"
+},
+{
+  username : "GoodGuyGreg",
+  title : "Steals your identity",
+  body : "Raises your credit score"
+},
+{
+  username : "GoodGuyGreg",
+  title : "Reports a bug in your code",
+  body : "Sends you a Pull Request"
+},
+{
+  username : "ScumbagSteve",
+  title : "Borrows something",
+  body : "Sells it"
+},
+{
+  username : "ScumbagSteve",
+  title : "Borrows everything",
+  body : "The end"
+},
+{
+  username : "ScumbagSteve",
+  title : "Forks your repo on github",
+  body : "Sets to private"
+}
+])
+
+(3) Insert into comments collection
+Ans:db.comments.insert([{
+  username : "GoodGuyGreg",
+  comment : "Hope you got a good deal!",
+  post : ObjectId("5e298695b3dacd5615b14cc6")
+},
+{
+  username : "GoodGuyGreg",
+  comment : "What's mine is yours!",
+  post : ObjectId("5e298695b3dacd5615b14cc7")
+},
+{
+  username : "GoodGuyGreg",
+  comment : "Don't violate the licensing agreement!",
+  post : ObjectId("5e298695b3dacd5615b14cc8")
+},
+{
+  username : "ScumbagSteve",
+  comment : "It still isn't clean",
+  post :ObjectId("5e298695b3dacd5615b14cc3")
+},
+{
+  username : "ScumbagSteve",
+  comment : "Denied your PR cause I found a hack",
+  post : ObjectId("5e298695b3dacd5615b14cc5")
+}
+])
+
+*QUERYING RELATED COLLECTIONS*
+(1) find all users
+Ans:db.users.find().pretty()
+
+(2) find all posts
+Ans:db.posts.find().pretty()
+
+(3) find all posts that was authored by "GoodGuyGreg"
+Ans:db.posts.find({username:"GoodGuyGreg"}).pretty()
+
+(4)find all posts that was authored by "ScumbagSteve"
+Ans:db.posts.find({username:"ScumbagSteve"}).pretty()
+
+(5) find all comments
+Ans:db.comment.find().pretty()
+
+(6) find all comments that was authored by "GoodGuyGreg"
+Ans:db.comment.find({username:"GoodGuyGreg"}).pretty()
+
+(7) find all comments that was authored by "ScumbagSteve"
+Ans:db.comment.find({username:"ScumbagSteve"}).pretty()
+
+(8) find all comments belonging to the post "Reports a bug in your code"
+Ans:db.comment.find({title:"Reports a bug in your code"}).pretty()
